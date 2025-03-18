@@ -4,6 +4,9 @@ import { Document } from 'mongoose';
 @Schema()
 export class User extends Document {
   @Prop({ required: true })
+  userId: string;
+
+  @Prop({ required: true })
   name: string;
 
   @Prop({ required: true, unique: true })
@@ -14,20 +17,12 @@ export class User extends Document {
 
   @Prop()
   profilePic: string;
+
+  @Prop({ default: false })  // Ensure this field exists
+  isVerified: boolean;
+
+  @Prop()
+  verificationToken: string;  // Ensure this field exists
 }
 
-@Schema()
-export class chatApp extends Document {
-
-  @Prop({ required: true })
-  name: string;
-
-  @Prop({ required: true })
-  user_id: string;
-
-  @Prop({ required: true })
-  id : string;
-
-
-}
 export const UserSchema = SchemaFactory.createForClass(User);

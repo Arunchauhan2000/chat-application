@@ -6,13 +6,17 @@ import { User, UserSchema } from './user.schema';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './jwt.strategy';
 import { PassportModule } from '@nestjs/passport';
+import { Friend, FriendSchema } from './friends.schema';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
+    MongooseModule.forFeature([
+      { name: User.name, schema: UserSchema },
+      { name: Friend.name, schema: FriendSchema },
+    ]),
     PassportModule,
     JwtModule.register({
-      secret: 'your_secret_key', // ✅ Hardcoded JWT Secret Key
+      secret: 'your_secret_key',
       signOptions: { expiresIn: '1d' },
     }),
   ],
@@ -20,4 +24,4 @@ import { PassportModule } from '@nestjs/passport';
   providers: [AuthService, JwtStrategy],
   exports: [AuthService],
 })
-export class AuthModule {}
+export class  AuthModule {}
